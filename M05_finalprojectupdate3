@@ -1,0 +1,121 @@
+// 11/25/23
+// Pierce Mohney
+// SDEV 200
+// Final Project update 3
+// This program is roughdraft of the final project, which will be a mediapost JavaFX application.
+// In this rough draft program the user will enter a filename, media type, and a username.
+// The program will return with the user inputted information along with a typestamp of the upload date.
+// Program stores post information in view class which also controls posts shown in JavaFX logic. 
+// Program does not contain logic for JavaFX application. 
+
+import java.util.Date;
+import java.util.Scanner;
+
+class Media {
+    private String mediaPost;
+    private String mediaType;
+    private Username username;
+
+    public Media(String mediaPost, String mediaType, Username username) {
+        this.mediaPost = mediaPost;
+        this.mediaType = mediaType;
+        this.username = username;
+    }
+
+    public String getMediaPost() {
+        return mediaPost;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public String getUsername() {
+        return username.getUsername();
+    }
+
+    public Date getDate() {
+        return new Date();
+//Class to contain media details along with getting media details and a timestamp
+    }
+}
+
+class Username {
+    private String username;
+
+    public Username(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+//Class to contain and get user inputted username
+    }
+}
+
+class View {
+    private String currentPost;
+    private String playMedia;
+    private String pauseMedia;
+    private int postCount;
+
+    public View(String currentPost, String playMedia, String pauseMedia) {
+        this.currentPost = currentPost;
+        this.playMedia = playMedia;
+        this.pauseMedia = pauseMedia;
+        this.postCount = 0;
+    }
+
+    public void uploadMedia(Media media) {
+        System.out.println("Media Post: " + media.getMediaPost());
+        System.out.println("Media Type: " + media.getMediaType());
+        System.out.println("Username: " + media.getUsername());
+        System.out.println("Upload Date: " + media.getDate());
+
+        postCount++;
+        System.out.println("Post Count: " + postCount);
+    }
+
+    public void nextMedia() {
+        System.out.println("Next media action performed");
+    }
+
+    public void lastMedia() {
+        System.out.println("Last media action performed");
+
+//Class used for outputting post information to JavaFX application
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Media Post Filename ");
+        String mediaPost = scanner.nextLine();
+
+        System.out.print("Enter Media Type ");
+        String mediaType = scanner.nextLine().toLowerCase();
+
+        while (!mediaType.equals("video") && !mediaType.equals("picture")) {
+            System.out.println("Invalid media type. Please enter video or picture ");
+            System.out.print("Enter Media Type ");
+            mediaType = scanner.nextLine().toLowerCase();
+        }
+
+        System.out.print("Enter Username: ");
+        String usernameInput = scanner.nextLine();
+
+        Username user = new Username(usernameInput);
+
+        Media media = new Media(mediaPost, mediaType, user);
+
+        System.out.println("\nMedia Post: " + media.getMediaPost());
+        System.out.println("Media Type: " + media.getMediaType());
+        System.out.println("Username: " + media.getUsername());
+        System.out.println("Upload Date: " + media.getDate());
+//Test program that prompts user to enter in mock post details and returns output of the post information
+
+        scanner.close();
+    }
+}
